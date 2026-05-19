@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Video Generator</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="8" fill="url(#grad)"/>
+            <polygon points="10,7 22,14 10,21" fill="white"/>
+            <defs>
+              <linearGradient id="grad" x1="0" y1="0" x2="28" y2="28">
+                <stop offset="0%" stop-color="#7c3aed"/>
+                <stop offset="100%" stop-color="#4f46e5"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>VideoGen AI</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" id="btnGenerate" onclick="showPanel('generate')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
+          Generate
+        </button>
+        <button class="nav-btn" id="btnHistory" onclick="showPanel('history')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><polyline points="12 6 12 12 16 14"/></svg>
+          History
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="https://fal.ai/models/fal-ai/kling-video" target="_blank" class="model-badge">
+          Powered by Kling v1.6 Pro
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main area -->
+    <main class="main">
+      <!-- Generate panel -->
+      <div id="panelGenerate" class="panel active">
+        <div class="panel-content">
+          <div class="form-card">
+            <h2 class="form-title">Create a Video</h2>
+            <p class="form-subtitle">Describe your scene and let Kling AI bring it to life.</p>
+
+            <div class="field">
+              <label for="prompt">Prompt</label>
+              <textarea
+                id="prompt"
+                placeholder="A cinematic drone shot flying over a misty mountain range at sunrise, golden light breaking through clouds..."
+                rows="5"
+                maxlength="2500"
+              ></textarea>
+              <div class="char-count"><span id="charCount">0</span> / 2500</div>
+            </div>
+
+            <details class="advanced">
+              <summary>Advanced options</summary>
+              <div class="advanced-grid">
+                <div class="field">
+                  <label for="negPrompt">Negative Prompt</label>
+                  <textarea id="negPrompt" placeholder="blurry, low quality, watermark..." rows="3" maxlength="2500"></textarea>
+                </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label for="duration">Duration</label>
+                    <select id="duration">
+                      <option value="5">5 seconds</option>
+                      <option value="10">10 seconds</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="aspectRatio">Aspect Ratio</label>
+                    <select id="aspectRatio">
+                      <option value="16:9">16:9 — Landscape</option>
+                      <option value="9:16">9:16 — Portrait</option>
+                      <option value="1:1">1:1 — Square</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="cfgScale">
+                    Creativity
+                    <span class="hint">lower = more creative, higher = follows prompt strictly</span>
+                  </label>
+                  <div class="slider-row">
+                    <input type="range" id="cfgScale" min="0" max="1" step="0.05" value="0.5" />
+                    <span id="cfgValue">0.5</span>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <button class="btn-generate" id="btnSubmit" onclick="submitGeneration()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Generate Video
+            </button>
+          </div>
+
+          <!-- Progress card (hidden by default) -->
+          <div class="progress-card" id="progressCard" style="display:none">
+            <div class="progress-header">
+              <div class="spinner"></div>
+              <span id="progressStatus">Generating…</span>
+            </div>
+            <div class="log-box" id="logBox"></div>
+          </div>
+
+          <!-- Result card (hidden by default) -->
+          <div class="result-card" id="resultCard" style="display:none">
+            <div class="result-header">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Video Generated!
+            </div>
+            <video id="resultVideo" controls playsinline></video>
+            <div class="result-actions">
+              <a id="downloadBtn" href="#" download class="btn-download">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download
+              </a>
+              <button class="btn-new" onclick="resetForm()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.21"/></svg>
+                New Video
+              </button>
+            </div>
+          </div>
+
+          <!-- Error card -->
+          <div class="error-card" id="errorCard" style="display:none">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span id="errorMsg">Something went wrong.</span>
+            <button class="btn-retry" onclick="resetForm()">Try Again</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- History panel -->
+      <div id="panelHistory" class="panel">
+        <div class="panel-content">
+          <h2 class="form-title">Generated Videos</h2>
+          <p class="form-subtitle">Videos from this session (cleared on restart).</p>
+          <div id="historyGrid" class="history-grid">
+            <p class="empty-state">No videos generated yet.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
