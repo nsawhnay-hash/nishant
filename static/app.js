@@ -7,13 +7,6 @@ promptEl.addEventListener('input', () => {
   charCountEl.textContent = promptEl.value.length;
 });
 
-// ── CFG slider label ──
-const cfgScale = document.getElementById('cfgScale');
-const cfgValue = document.getElementById('cfgValue');
-cfgScale.addEventListener('input', () => {
-  cfgValue.textContent = parseFloat(cfgScale.value).toFixed(2);
-});
-
 // ── Panel switching ──
 function showPanel(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -36,10 +29,8 @@ async function submitGeneration() {
 
   const payload = {
     prompt,
-    negative_prompt: document.getElementById('negPrompt').value.trim(),
-    duration: document.getElementById('duration').value,
-    aspect_ratio: document.getElementById('aspectRatio').value,
-    cfg_scale: parseFloat(cfgScale.value),
+    quality: document.getElementById('quality').value,
+    resolution: document.getElementById('resolution').value,
   };
 
   setUIState('generating');

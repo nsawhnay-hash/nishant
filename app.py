@@ -1,17 +1,24 @@
 import os
+import time
 import uuid
 import threading
-import requests
 from pathlib import Path
+
+import requests
 from flask import Flask, render_template, request, jsonify, send_from_directory
-import fal_client
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
 VIDEOS_DIR = Path("videos")
 VIDEOS_DIR.mkdir(exist_ok=True)
 
-# In-memory job store (sufficient for personal use)
+HF_TOKEN = os.environ.get("HF_TOKEN", "")
+# Free open-source text-to-video model on HF Inference API
+MODEL_URL = "https://api-inference.huggingface.co/models/damo-vilab/text-to-video-ms-1.7b"
+
 jobs: dict = {}
 
 
@@ -26,6 +33,8 @@ def generate():
     prompt = data.get("prompt", "").strip()
     if not prompt:
         return jsonify({"error": "Prompt is required"}), 400
+    if not HF_TOKEN:
+        return jsonify({"error": "HF_TOKEN not set. Add it to your .env file."}), 500
 
     job_id = str(uuid.uuid4())
     jobs[job_id] = {"status": "queued", "logs": [], "video_url": None, "error": None}
@@ -40,41 +49,73 @@ def _run_generation(job_id: str, data: dict):
     job = jobs[job_id]
     try:
         job["status"] = "running"
-        job["logs"].append("Submitting to Kling AI...")
 
-        model = "fal-ai/kling-video/v1.6/pro/text-to-video"
-        args = {
-            "prompt": data.get("prompt", ""),
-            "negative_prompt": data.get("negative_prompt", ""),
-            "duration": data.get("duration", "5"),
-            "aspect_ratio": data.get("aspect_ratio", "16:9"),
-            "cfg_scale": float(data.get("cfg_scale", 0.5)),
+        quality = data.get("quality", "balanced")
+        steps_map = {"fast": 15, "balanced": 25, "high": 40}
+        steps = steps_map.get(quality, 25)
+
+        res_map = {"256": 256, "512": 512}
+        size = res_map.get(data.get("resolution", "256"), 256)
+
+        headers = {
+            "Authorization": f"Bearer {HF_TOKEN}",
+            "Content-Type": "application/json",
+        }
+        payload = {
+            "inputs": data.get("prompt", ""),
+            "parameters": {
+                "num_inference_steps": steps,
+                "height": size,
+                "width": size,
+                "num_frames": 16,
+            },
         }
 
-        def on_update(update):
-            if isinstance(update, fal_client.InProgress):
-                for log in update.logs:
-                    msg = log.get("message", "").strip()
-                    if msg:
-                        job["logs"].append(msg)
+        job["logs"].append("Connecting to Hugging Face…")
 
-        result = fal_client.subscribe(
-            model,
-            arguments=args,
-            with_logs=True,
-            on_queue_update=on_update,
-        )
+        # Retry loop — model may need to warm up (returns 503 while loading)
+        deadline = time.time() + 600  # 10-min max
+        attempt = 0
+        resp = None
+        while time.time() < deadline:
+            attempt += 1
+            job["logs"].append(f"Sending request (attempt {attempt})…")
+            try:
+                resp = requests.post(MODEL_URL, headers=headers, json=payload, timeout=180)
+            except requests.Timeout:
+                job["logs"].append("Request timed out, retrying…")
+                time.sleep(10)
+                continue
 
-        video_url = result["video"]["url"]
-        job["logs"].append("Downloading video...")
+            if resp.status_code == 200:
+                break
+            elif resp.status_code == 503:
+                try:
+                    info = resp.json()
+                    est = int(info.get("estimated_time", 20))
+                except Exception:
+                    est = 20
+                wait = min(est, 45)
+                job["logs"].append(f"Model is loading on HF servers, waiting {wait}s…")
+                time.sleep(wait)
+            elif resp.status_code == 429:
+                job["logs"].append("Rate limited — waiting 30s…")
+                time.sleep(30)
+            else:
+                try:
+                    detail = resp.json()
+                except Exception:
+                    detail = resp.text[:300]
+                raise RuntimeError(f"API error {resp.status_code}: {detail}")
 
+        if resp is None or resp.status_code != 200:
+            raise RuntimeError("Model did not respond in time. Please try again.")
+
+        job["logs"].append("Saving video…")
         filename = f"{job_id}.mp4"
         filepath = VIDEOS_DIR / filename
-        resp = requests.get(video_url, stream=True, timeout=120)
-        resp.raise_for_status()
         with open(filepath, "wb") as f:
-            for chunk in resp.iter_content(chunk_size=8192):
-                f.write(chunk)
+            f.write(resp.content)
 
         job["status"] = "completed"
         job["video_url"] = f"/videos/{filename}"
@@ -101,10 +142,11 @@ def serve_video(filename: str):
 
 @app.route("/history")
 def history():
-    items = []
-    for jid, job in jobs.items():
-        if job["status"] == "completed" and job["video_url"]:
-            items.append({"job_id": jid, "video_url": job["video_url"]})
+    items = [
+        {"job_id": jid, "video_url": job["video_url"]}
+        for jid, job in jobs.items()
+        if job["status"] == "completed" and job["video_url"]
+    ]
     return jsonify(items)
 
 

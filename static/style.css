@@ -251,6 +251,22 @@ input[type="range"] {
   padding: 20px 16px 4px;
 }
 
+/* ── Info box ── */
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #1e1e30;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.info-box svg { flex-shrink: 0; margin-top: 1px; }
+
 /* ── Buttons ── */
 .btn-generate {
   width: 100%;

@@ -38,8 +38,8 @@
       </nav>
 
       <div class="sidebar-footer">
-        <a href="https://fal.ai/models/fal-ai/kling-video" target="_blank" class="model-badge">
-          Powered by Kling v1.6 Pro
+        <a href="https://huggingface.co/damo-vilab/text-to-video-ms-1.7b" target="_blank" class="model-badge">
+          ModelScope T2V · Free &amp; Open Source
         </a>
       </div>
     </aside>
@@ -51,59 +51,49 @@
         <div class="panel-content">
           <div class="form-card">
             <h2 class="form-title">Create a Video</h2>
-            <p class="form-subtitle">Describe your scene and let Kling AI bring it to life.</p>
+            <p class="form-subtitle">100% free — powered by Hugging Face open-source AI. No credits, no billing.</p>
 
             <div class="field">
               <label for="prompt">Prompt</label>
               <textarea
                 id="prompt"
-                placeholder="A cinematic drone shot flying over a misty mountain range at sunrise, golden light breaking through clouds..."
+                placeholder="A golden retriever running through a field of sunflowers, slow motion, cinematic..."
                 rows="5"
-                maxlength="2500"
+                maxlength="500"
               ></textarea>
-              <div class="char-count"><span id="charCount">0</span> / 2500</div>
+              <div class="char-count"><span id="charCount">0</span> / 500</div>
             </div>
 
             <details class="advanced">
               <summary>Advanced options</summary>
               <div class="advanced-grid">
-                <div class="field">
-                  <label for="negPrompt">Negative Prompt</label>
-                  <textarea id="negPrompt" placeholder="blurry, low quality, watermark..." rows="3" maxlength="2500"></textarea>
-                </div>
                 <div class="field-row">
                   <div class="field">
-                    <label for="duration">Duration</label>
-                    <select id="duration">
-                      <option value="5">5 seconds</option>
-                      <option value="10">10 seconds</option>
+                    <label for="quality">Quality</label>
+                    <select id="quality">
+                      <option value="fast">Fast — ~30s</option>
+                      <option value="balanced" selected>Balanced — ~60s</option>
+                      <option value="high">High quality — ~2min</option>
                     </select>
                   </div>
                   <div class="field">
-                    <label for="aspectRatio">Aspect Ratio</label>
-                    <select id="aspectRatio">
-                      <option value="16:9">16:9 — Landscape</option>
-                      <option value="9:16">9:16 — Portrait</option>
-                      <option value="1:1">1:1 — Square</option>
+                    <label for="resolution">Resolution</label>
+                    <select id="resolution">
+                      <option value="256" selected>256px — faster</option>
+                      <option value="512">512px — sharper</option>
                     </select>
                   </div>
                 </div>
-                <div class="field">
-                  <label for="cfgScale">
-                    Creativity
-                    <span class="hint">lower = more creative, higher = follows prompt strictly</span>
-                  </label>
-                  <div class="slider-row">
-                    <input type="range" id="cfgScale" min="0" max="1" step="0.05" value="0.5" />
-                    <span id="cfgValue">0.5</span>
-                  </div>
+                <div class="info-box">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  Generates a 2-second clip (16 frames). First run may take longer while the model loads on HF servers.
                 </div>
               </div>
             </details>
 
             <button class="btn-generate" id="btnSubmit" onclick="submitGeneration()">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              Generate Video
+              Generate Video — Free
             </button>
           </div>
 
