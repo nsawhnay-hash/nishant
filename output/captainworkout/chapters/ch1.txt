@@ -1,0 +1,48 @@
+CHAPTER 1 PROMPT (target ~14s):
+
+Script lines covered: "You've been doing pull-ups, dips, and muscle-ups for months. Your back is growing. Your chest is getting there. But your shoulders? Just along for the ride. Let me fix that. In calisthenics, your shoulders never get their own workout."
+
+CHARACTER LOCK (identical every chapter):
+A stylized comic-book / anime fitness illustration of a lean, athletic male character with vibrant solid teal skin across his entire body, completely bald smooth head, sharp focused facial expression with narrow white slit eyes (no pupils), subtle facial shadows, and clean confident features. Lean muscular build — NOT bulky or oversized — defined and aesthetic proportions: visible six-pack abs with clean separation, defined but not exaggerated chest, athletic shoulders, lean toned arms with visible bicep and tricep definition, slim waist, lean defined quads. Wearing clean bright white athletic shorts and long black compression sleeves covering both forearms from elbow to wrist. Bold thick black outlines, high-contrast cell-shaded coloring with crisp white highlights and deeper teal-shadow tones for muscle definition, glossy almost vinyl-like skin finish. Reference image: teal_character_ref.png — attached to this Seedance submission as the character reference.
+
+STYLE ANCHOR (identical every chapter):
+Stylized comic-book / anime cell-shaded illustration animation. Completely flat-but-cell-shaded coloring with bold thick black outlines of even weight. Glossy vinyl-like character finish. Vector-comic hybrid look, sharp clean lines, professional and polished. 16:9 horizontal, 1920×1080, 24fps. Tone: confident setup, calling out the viewer's blind spot. Slow continuous virtual-camera motion, one move per beat.
+
+ENVIRONMENT LOCK (identical every chapter):
+Plain warm cream #F5E6D3 background throughout — completely empty. No gym walls, no floor lines, no scenery, no posters, no equipment racks, no shadows on the ground. The cream void is the only environment and it NEVER changes across any chapter. Equipment appears only when actively held or used by the character, and disappears from frame otherwise.
+
+PROP PALETTE:
+- pull-up bar: simple black horizontal bar with two short vertical supports, bold black outlines, no brand markings, no realistic texture
+
+VOICEOVER:
+Confident-coach mid-range male voice — energetic, dry-humored, slightly cocky training-partner energy. Brisk but clear pacing. Drops in pitch on punchy short sentences, lifts on rhetorical questions. Never preachy, never doctor-y.
+
+[00:00–00:03] HERO — STANDING
+The teal character stands centered in a medium shot, arms crossed, looking at the lens with a slight knowing smirk and focused white slit eyes. Cream void background. Camera: locked, no movement.
+VO: "You've been doing pull-ups, dips, and muscle-ups for months."
+SFX: near-silence, faint room tone.
+
+[00:03–00:06] DEMO — PULL-UP
+Medium shot of the teal character gripping a simple black pull-up bar overhead, mid-rep, back lats flared wide, arms fully engaged, white slit eyes focused upward. Cream void. Camera: slow inward dolly (~15%).
+VO: "Your back is growing. Your chest is getting there."
+SFX: grip squeak on bar, controlled exhale.
+
+[00:06–00:09] HERO — DISAPPOINTED SHRUG
+Medium shot of the teal character glancing sideways down at his own shoulder with a flat unimpressed expression, giving a slow dry shrug as if the shoulder itself is the problem. Camera: locked, no movement.
+VO: "But your shoulders? Just along for the ride."
+SFX: quick fabric swish on the sleeve.
+
+[00:09–00:11] HERO — DIRECT POINT
+Close-up of the teal character pointing directly into the lens, slit eyes narrowed, dead serious expression. Camera: slow push-in (~10%).
+VO: "Let me fix that."
+SFX: single low tap sound.
+
+[00:11–00:14] WIDE — FULL BODY
+Wide shot of the teal character standing in the cream void, arms relaxed at sides, head level, addressing the viewer directly with a calm confident look. Camera: slow pull-back (~10%).
+VO: "In calisthenics, your shoulders never get their own workout."
+SFX: near-silence, faint room tone.
+
+NEGATIVE PROMPT:
+photorealistic gym, 3d render, gradient skin shading, soft shading, ambient occlusion, depth of field, glossy 3d effects, semi-realistic, volumetric lighting, watercolor texture, painterly style, hair on head, beard, facial hair, eyebrows, pupils, regular eyes, bulky bodybuilder physique, oversized muscles, gloves, exposed forearms, jewelry, tattoos, environmental detail, gym walls, floor lines, shadows on the ground, equipment in background not in active use, posters, mirrors, weight racks, photoreal equipment textures, brand logos on equipment, character color drift mid-chapter, environment change mid-chapter, text overlays, captions, subtitles, on-screen UI, logos, watermarks, stacked camera moves, whip pans within a single beat, no outdoor scenery, no realistic bar texture, no chalk physics, no realistic cable system.
+
+→ HANDOFF: Match-cut on character face angle. Match frame: last frame of Ch1 is the teal character in wide shot, arms at sides, facing forward. First frame of Ch2 opens on a close-up of the same face with a more pointed coach expression.

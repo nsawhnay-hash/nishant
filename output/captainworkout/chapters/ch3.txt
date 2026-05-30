@@ -1,0 +1,49 @@
+CHAPTER 3 PROMPT (target ~14s):
+
+Script lines covered: "Three moves fix this. Lateral raises for side delt width. Pike push-ups for overhead power. Ring face pulls to bulletproof your rotator cuff. Train these twice a week. Click here to find out why your tendons never heal."
+
+CHARACTER LOCK (identical every chapter):
+A stylized comic-book / anime fitness illustration of a lean, athletic male character with vibrant solid teal skin across his entire body, completely bald smooth head, sharp focused facial expression with narrow white slit eyes (no pupils), subtle facial shadows, and clean confident features. Lean muscular build — NOT bulky or oversized — defined and aesthetic proportions: visible six-pack abs with clean separation, defined but not exaggerated chest, athletic shoulders, lean toned arms with visible bicep and tricep definition, slim waist, lean defined quads. Wearing clean bright white athletic shorts and long black compression sleeves covering both forearms from elbow to wrist. Bold thick black outlines, high-contrast cell-shaded coloring with crisp white highlights and deeper teal-shadow tones for muscle definition, glossy almost vinyl-like skin finish. Reference image: teal_character_ref.png — attached to this Seedance submission as the character reference.
+
+STYLE ANCHOR (identical every chapter):
+Stylized comic-book / anime cell-shaded illustration animation. Completely flat-but-cell-shaded coloring with bold thick black outlines of even weight. Glossy vinyl-like character finish. Vector-comic hybrid look, sharp clean lines, professional and polished. 16:9 horizontal, 1920×1080, 24fps. Tone: motivational and energetic — delivering the solution and CTA with conviction. Slow continuous virtual-camera motion, one move per beat.
+
+ENVIRONMENT LOCK (identical every chapter):
+Plain warm cream #F5E6D3 background throughout — completely empty. No gym walls, no floor lines, no scenery, no posters, no equipment racks, no shadows on the ground. The cream void is the only environment and it NEVER changes across any chapter. Equipment appears only when actively held or used by the character, and disappears from frame otherwise.
+
+PROP PALETTE:
+- resistance band: simple black resistance band loop stepped underfoot, bold black outline, no brand markings, no realistic texture
+- gymnastic rings: two simple black circular rings hanging from short black straps, bold black outlines, no brand markings
+
+VOICEOVER:
+Same voice as previous chapters. Slightly accelerated through the three exercise names — delivered like punchy list items. "Train these twice a week" lands short and sharp. CTA "Click here to find out why your tendons never heal" delivered with intrigue — coach handing you the next play.
+
+[00:00–00:02] HERO — THREE FINGERS
+Medium shot of the teal character facing the lens, holding up three fingers with a locked-in confident expression, slit eyes direct. Cream void. Camera: locked, no movement.
+VO: "Three moves fix this."
+SFX: single finger-count tap.
+
+[00:02–00:05] DEMO — LATERAL RAISE
+Medium shot of the teal character performing a lateral raise with a simple black resistance band stepped underfoot, arms lifting out to shoulder height, side delts visibly engaged with crisp cell-shaded teal-shadow muscle definition at peak contraction. Camera: slow inward dolly (~15%).
+VO: "Lateral raises for side delt width."
+SFX: band tension creak at the top of the movement.
+
+[00:05–00:08] DEMO — PIKE PUSH-UP
+Wide shot of the teal character in a deep pike position (hips high forming an inverted V), head lowering toward the cream void, arms fully controlled. Camera: slow lateral pan right (~10%).
+VO: "Pike push-ups for overhead power."
+SFX: controlled exhale on the way down, subtle floor contact.
+
+[00:08–00:11] DEMO — RING FACE PULL
+Medium shot of the teal character leaning back holding two simple black gymnastic rings, pulling them toward his face with rear delts and upper back visibly engaged in cell-shaded definition. Camera: slow inward dolly (~12%).
+VO: "Ring face pulls to bulletproof your rotator cuff."
+SFX: ring strap tension creak, exhale on the pull.
+
+[00:11–00:14] HERO — CTA FREEZE
+Medium close-up of the teal character pointing directly at the camera with a confident, slightly cocky smirk, then settling into his signature hero pose — chest out, arms relaxed, slit eyes locked on lens. Frame holds steady. Camera: locked, no movement.
+VO: "Train these twice a week. Click here to find out why your tendons never heal."
+SFX: subtle high-pitched ding on "click," low bass tone resolving under the final line.
+
+NEGATIVE PROMPT:
+photorealistic gym, 3d render, gradient skin shading, soft shading, ambient occlusion, depth of field, glossy 3d effects, semi-realistic, volumetric lighting, watercolor texture, painterly style, hair on head, beard, facial hair, eyebrows, pupils, regular eyes, bulky bodybuilder physique, oversized muscles, gloves, exposed forearms, jewelry, tattoos, environmental detail, gym walls, floor lines, shadows on the ground, equipment in background not in active use, posters, mirrors, weight racks, photoreal equipment textures, brand logos on equipment, character color drift mid-chapter, environment change mid-chapter, text overlays, captions, subtitles, on-screen UI, logos, watermarks, stacked camera moves, whip pans within a single beat, no on-screen "subscribe" or "click here" text overlay (CTA is spoken only, not visual), no end-card UI, no YouTube thumbnail mockup in frame, no realistic tendon anatomy diagram.
+
+→ END OF CLIP. Final frame holds on the teal character's hero pose for ~0.5s before cut to black.
